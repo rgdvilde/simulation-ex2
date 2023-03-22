@@ -4,6 +4,7 @@ int nr_fruits = 4;
 FILE *file1;
 char fileName[300];
 int runs = 10000;
+bool smarter_children = false;
 
 int fruitsLeft(int fruitArray[], int sizeOfArray) {
     int f = 0;
@@ -30,9 +31,26 @@ float procedure(int k) {
                 fruits[i2]--;
                 }
                 else {
-                    int i3 = rand()%nr_fruits;
-                    while(fruits[i3] == 0) {
-                        i3 = rand()%nr_fruits;
+                    int i3;
+                    if(smarter_children) {
+                        if(fruitsLeft(fruits, position_raven) > 0) {
+                            i3 = rand()%position_raven;
+                            while(fruits[i3] == 0) {
+                                i3 = rand()%position_raven;
+                            }
+                        }
+                        else {
+                            int i3 = rand()%nr_fruits;
+                            while(fruits[i3] == 0) {
+                                i3 = rand()%nr_fruits;
+                            }
+                        }
+                    }
+                    else {
+                        int i3 = rand()%nr_fruits;
+                        while(fruits[i3] == 0) {
+                            i3 = rand()%nr_fruits;
+                        }                        
                     }
                     fruits[i3]--;
                 }
